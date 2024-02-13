@@ -1,18 +1,4 @@
-<x-guest-layout>
-<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url('https://wallpaperset.com/w/full/e/a/7/181063.jpg'); background-size: cover; background-position: center center;">
-  <div class="rounded-xl bg-gray-800 bg-opacity-20 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
-    <div class="text-white">
-      <div class="mb-8 flex flex-col items-center">
-        <img src="images/logo.png" width="125" alt="" srcset="" />
-        <h1 class="mb-2 text-2xl">register as a driver</h1>
-        <span class="text-gray-300">Enter your informations</span>
-      </div>
-
-    <form method="POST" action="{{ route('driver-register') }}">
-        @csrf
-        <div class="flex">
-    <div class="mt-4 mr-2">
-    @if ($errors->any())
+<x-guest-layout>@if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -21,6 +7,20 @@
         </ul>
     </div>
     @endif
+<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url('https://wallpaperset.com/w/full/e/a/7/181063.jpg'); background-size: cover; background-position: center center;">
+  <div class="rounded-xl bg-gray-800 bg-opacity-20 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+    <div class="text-white">
+      <div class="mb-8 flex flex-col items-center">
+        <img src="images/logo.png" width="125" alt="" srcset="" />
+        <h1 class="mb-2 text-2xl">register as a driver</h1>
+        <span class="text-gray-300">Enter your informations</span>
+      </div>
+ 
+    <form method="POST" action="{{ route('driver-register') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="flex">
+    <div class="mt-4 mr-2">
+   
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -57,14 +57,7 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
-        <!--picture-->
-        <div class="mt-4">
-            <x-input-label for="picture" :value="__('picture')" />
-
-            <x-file-input id="picture" type="file" name="picture" required autocomplete="new-picture" class="rounded-3xl border-none w-72 bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" />
-
-            <x-input-error :messages="$errors->get('picture')" class="mt-2" />
-        </div>
+       
     </div>
     <div>
         <div class="mt-4">
@@ -78,14 +71,14 @@
             <x-input-error :messages="$errors->get('description')" class="mt-2" />
         </div> 
         <div class="mt-4">
-            <x-input-label for="vehicle-type" :value="__('vehicle-type')" />
+            <x-input-label for="vehicule_type" :value="__('vehicule_type')" />
 
-            <x-text-input id="vehicle-type" class="block mt-1 w-full"
-                            type="vehicle-type"
-                            name="vehicle-type"
-                            required autocomplete="new-vehicle-type" class="rounded-3xl border-none w-72 bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"  />
+            <x-text-input id="vehicule_type" class="block mt-1 w-full"
+                            type="vehicule_type"
+                            name="vehicule_type"
+                            required autocomplete="new-vehicule_type" class="rounded-3xl border-none w-72 bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"  />
 
-            <x-input-error :messages="$errors->get('vehicle-type')" class="mt-2" />
+            <x-input-error :messages="$errors->get('vehicule_type')" class="mt-2" />
         </div>
         <div class="mt-4">
             <x-input-label for="license_plate" :value="__('license_plate')" />
@@ -97,36 +90,15 @@
 
             <x-input-error :messages="$errors->get('license_plate')" class="mt-2" />
         </div>
+        <!--picture-->
         <div class="mt-4">
-            <x-input-label for="payment_accepted" :value="__('payment_accepted')" />
+            <x-input-label for="image" :value="__('image')" />
 
-            <x-text-input id="payment_accepted" class="block mt-1 w-full"
-                            type="payment_accepted"
-                            name="payment_accepted"
-                            required autocomplete="new-payment_accepted" class="rounded-3xl border-none w-72 bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"  />
+            <x-file-input id="image" type="file" name="picture" required autocomplete="new-image" class="rounded-3xl border-none w-72 bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" />
 
-            <x-input-error :messages="$errors->get('payment_accepted')" class="mt-2" />
+            <x-input-error :messages="$errors->get('image')" class="mt-2" />
         </div>
-        <div class="mt-4">
-            <x-input-label for="start_location" :value="__('start_location')" />
-
-            <x-text-input id="start_location" class="block mt-1 w-full"
-                            type="start_location"
-                            name="start_location"
-                            required autocomplete="new-start_location" class="rounded-3xl border-none w-72 bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"  />
-
-            <x-input-error :messages="$errors->get('start_location')" class="mt-2" />
-        </div>
-        <div class="mt-4">
-            <x-input-label for="destination" :value="__('destination')" />
-
-            <x-text-input id="destination" class="block mt-1 w-full"
-                            type="destination"
-                            name="destination"
-                            required autocomplete="new-destination" class="rounded-3xl border-none w-72 bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"  />
-
-            <x-input-error :messages="$errors->get('destination')" class="mt-2" />
-        </div>
+       
     </div>
         </div><div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-black hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">

@@ -11,7 +11,11 @@
         <h1 class="mb-2 text-2xl">login</h1>
         <span class="text-gray-300">Enter Login Details</span>
       </div>
-
+      @if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success') }}
+    </div>
+@endif
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
