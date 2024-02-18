@@ -71,7 +71,7 @@
                                         class="ml-2 text-sm font-medium text-black ">Break</label>
                                 </div>
                                 <div class="flex items-center">
-                                    <input checked id="availablity_status-2" type="radio" value="Off service"
+                                    <input checked id="availablity_status-2" type="radio" value="Off Service"
                                         name="availablity_status"
                                         class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500 focus:ring-2 ">
                                     <label for="availablity_status-2" class="ml-2 text-sm font-medium text-black ">Off
@@ -150,8 +150,8 @@
                                 @if ($reservations->count() > 0)
                                 <div class="flex flex-wrap">
                                     @foreach ($reservations as $reservation)
-                                    <div class=" mt-2 mr-2 bg-gray-200 p-4 rounded-xl w-96">
-                                        <p>Trip: {{ $reservation->start_location }}-{{ $reservation->destination }} </p>
+                                    <div class=" mt-2 mr-4 ml-4  bg-gray-200 p-4 rounded-xl w-96">
+                                        <p>Trajet: {{ $reservation->start_location }}-{{ $reservation->destination }} </p>
                                         <p> date: {{
                                             $reservation->created_at }}</p>
 

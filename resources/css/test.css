@@ -1,0 +1,9 @@
+.star {
+    cursor: pointer;
+    font-size: 2rem;
+    color: #d3d3d3;
+}
+
+input[type="radio"]:checked~label {
+    color: #ffdf00;
+}

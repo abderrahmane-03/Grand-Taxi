@@ -13,10 +13,15 @@
 
                     <!-- Driver Information Section -->
                     <div class="mb-6">
-                     
-                        <h3 class="text-lg font-semibold mb-2">Driver Information</h3>
-                        <div class=" inline-flex"><img src="{{ asset('storage/image/' . Auth::user()->picture) }}"
-                                alt="Profile Picture" class="w-14 rounded-full mt-2">
+
+                        <h3 class="text-lg font-semibold mb-2">Admin Information</h3>
+                        <div class=" inline-flex"><svg class="w-16 h-16 text-gray-800" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M17 10v1.1l1 .5.8-.8 1.4 1.4-.8.8.5 1H21v2h-1.1l-.5 1 .8.8-1.4 1.4-.8-.8a4 4 0 0 1-1 .5V20h-2v-1.1a4 4 0 0 1-1-.5l-.8.8-1.4-1.4.8-.8a4 4 0 0 1-.5-1H11v-2h1.1l.5-1-.8-.8 1.4-1.4.8.8a4 4 0 0 1 1-.5V10h2Zm.4 3.6c.4.4.6.8.6 1.4a2 2 0 0 1-3.4 1.4A2 2 0 0 1 16 13c.5 0 1 .2 1.4.6ZM5 8a4 4 0 1 1 8 .7 7 7 0 0 0-3.3 3.2A4 4 0 0 1 5 8Zm4.3 5H7a4 4 0 0 0-4 4v1c0 1.1.9 2 2 2h6.1a7 7 0 0 1-1.8-7Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
                             <div class="flex ml-4 mt-2">
                                 <div class="flex flex-col">
                                     <p class="flex font-semibold"> {{ Auth::user()->name }}<svg
@@ -30,88 +35,151 @@
                                 </div>
                             </div>
                         </div>
-                      
+
                         <!-- Availability Update Section -->
-                        <form action="">
-                            <div class="mb-6">
-                                <h3 class="text-lg font-semibold mb-2 mt-4">Update Availability</h3>
-                                <!-- Add button or link to update availability -->
-                                <!-- Allow driver to specify accepted payment types -->
+                        <div class="mb-6 mt-6">
+                            <h3 class="text-lg font-semibold mb-2">Drivers</h3>
 
-                                <div class="flex items-center mb-4">
-                                    <input id="default-radio-1" type="radio" value="" name="default-radio"
-                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500   focus:ring-2">
-                                    <label for="default-radio-1"
-                                        class="ml-2 text-sm font-medium text-black ">available</label>
+                            <div class="flex flex-wrap">
+                                @foreach($alldrivers as $alldriver)
+                                <div class="mt-2 mr-4 ml-4 bg-yellow-200 p-4 rounded-xl w-96 relative">
+                                    <div class="flex justify-between">
+                                        <div>
+                                            <p class="inline-flex font-bold">Trajet:</p>
+                                            <p class="inline-flex font-semibold">{{ $alldriver->start_location }}-{{
+                                                $alldriver->destination }}</p>
+                                        </div>
+
+                                        <div>
+                                            <img src="{{ asset('storage/image/' .$alldriver->user->picture) }}"
+                                                alt="Profile Picture" class="inline-flex w-11  rounded-full  mr-3">
+
+                                        </div>
+                                    </div>
+                                    <div class="flex mb-4 justify-between">
+                                        <p class=" font-bold ">Average Rating:</p>
+                                        <div class=" items-center" id="avg_{{ $alldriver->id }}">
+
+                                            @if(isset($avgs[$alldriver->id]))
+                                            @php
+                                            $rating = $avgs[$alldriver->id];
+                                            $wholeStars = floor($rating);
+                                            $fractionalPart = $rating - $wholeStars;
+                                            @endphp
+
+
+                                            @for ($i = 0; $i < $wholeStars; $i++)
+                                            <svg
+                                                class=" inline-flex w-[18px] h-[18px] text-yellow-400"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
+                                                </svg>
+
+                                                @endfor
+
+
+                                                @if ($fractionalPart > 0)
+                                                <svg class=" inline-flex w-[18px] h-[18px] text-gray-800 dark:text-yellow-400"
+                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="currentColor" viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd"
+                                                        d="m13 4-.2-.6a1 1 0 0 0-1.2-.3c-.2 0-.3.2-.3.2l-.2.1c0 .2-.2.3-.3.5a33.9 33.9 0 0 0-2.4 4.4l-4.6.4a2 2 0 0 0-1.1 3.5l3.5 3-1 4.3A2 2 0 0 0 8 21.7l4-2.4c.5-.3.9-1 .9-1.7V4Zm-2 0Z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+
+                                                @endif
+
+                                                @else
+                                                Not Rated
+                                                @endif
+                                        </div>
+                                    </div>
+                                    <p class="inline-flex mr-1 font-bold"> Vehicle Type:</p>
+                                    <p class="inline-flex font-semibold">{{$alldriver->vehicule_type}}</p>
+
+
+                                    @if($alldriver->availablity_status == "Available")
+                                    <svg class="absolute top-0 left-[21rem] m-2" xmlns="http://www.w3.org/2000/svg">
+                                        <circle r="10" cx="10" cy="10" stroke-width="3" style="fill: #22c55e;" />
+                                    </svg>
+                                    <div class="flex justify-between">
+                                        <div>
+                                            <p class="inline-flex font-bold mt-4">Payment Type:</p>
+                                            <p class="inline-flex font-semibold">{{$alldriver->payment_accepted}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    @endif
+                                    @if($alldriver->availablity_status == "Off Service")
+                                    <svg class="absolute top-0 left-[21rem] m-2" xmlns="http://www.w3.org/2000/svg">
+                                        <circle r="10" cx="10" cy="10" stroke-width="3" style="fill:#ff4e4e;" />
+                                    </svg>
+                                    <div class="flex justify-between">
+                                        <p class="inline-flex font-bold mt-4">Payment
+                                            Type:{{$alldriver->payment_accepted}}
+                                        </p>
+
+                                    </div>
+                                    @endif
+                                    @if($alldriver->availablity_status == "Break")
+
+                                    <svg class="absolute top-0 left-[21rem] m-2" xmlns="http://www.w3.org/2000/svg">
+                                        <circle r="10" cx="10" cy="10" stroke-width="3" style="fill:#f59e0b;" />
+                                    </svg>
+                                    <div>
+                                        <p class="inline-flex font-bold mt-4">Payment Type:</p>
+                                        <p class="inline-flex font-semibold">{{$alldriver->payment_accepted}}
+                                        </p>
+                                    </div>
+
+                                    @endif
+
+
                                 </div>
-                                <div class="flex items-center mb-4">
-                                    <input id="default-radio-1" type="radio" value="" name="default-radio"
-                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500   focus:ring-2">
-                                    <label for="default-radio-1"
-                                        class="ml-2 text-sm font-medium text-black ">break</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input checked id="default-radio-2" type="radio" value="" name="default-radio"
-                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500 focus:ring-2 ">
-                                    <label for="default-radio-2" class="ml-2 text-sm font-medium text-black ">off
-                                        service</label>
-                                </div>
+                                @if($alldriver->banned == "0")
+                                <form method="POST" action="{{ route('bann.driver', ['driver' => $alldriver]) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" class="bg-red-400 mt-6 hover:text-white rounded-xl p-2 font-semibold">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm7.7-3.7a1 1 0 0 0-1.4 1.4l2.3 2.3-2.3 2.3a1 1 0 1 0 1.4 1.4l2.3-2.3 2.3 2.3a1 1 0 0 0 1.4-1.4L13.4 12l2.3-2.3a1 1 0 0 0-1.4-1.4L12 10.6 9.7 8.3Z" clip-rule="evenodd"/>
+                                        </svg>
+                                        ban
+                                    </button>
+                                </form>
+                            @endif
 
-                                <!-- Additional payment options can be added -->
-                                <!-- This button can open a modal or a form for the driver to update availability -->
-                            </div>
+                            @if($alldriver->banned == "1")
+                                <form method="POST" action="{{ route('unbann.driver', ['driver' => $alldriver]) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" class="bg-green-300 mt-6 hover:text-white rounded-xl p-2 font-semibold">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm7.7-3.7a1 1 0 0 0-1.4 1.4l2.3 2.3-2.3 2.3a1 1 0 1 0 1.4 1.4l2.3-2.3 2.3 2.3a1 1 0 0 0 1.4-1.4L13.4 12l2.3-2.3a1 1 0 0 0-1.4-1.4L12 10.6 9.7 8.3Z" clip-rule="evenodd"/>
+                                        </svg>
+                                        unban
+                                    </button>
+                                </form>
+                            @endif
 
-                            <!-- Trip History and Ratings Section -->
-                            <div class="mb-6">
-                                <h3 class="text-lg font-semibold mb-2">Trip History and Ratings</h3>
-                                <!-- Display previous trips and ratings -->
-                                <!-- Example: -->
-                                <div>
-                                    <p>Trip to: Destination - Date</p>
-                                    <p>Rating: .5/5 stars</p>
-                                </div>
-                            </div>
+                                @endforeach
 
-                            <!-- Payment Options Section -->
-                            <div class="mb-6">
-                                <h3 class="text-lg font-semibold mb-2">Payment Options</h3>
-                                <!-- Allow driver to specify accepted payment types -->
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" class="form-checkbox" checked>
-                                    <span class="ml-2">Cash</span>
-                                </label>
-                                <label class="inline-flex items-center ml-6">
-                                    <input type="checkbox" class="form-checkbox">
-                                    <span class="ml-2">Card</span>
-                                </label>
-                                <label class="inline-flex items-center ml-6">
-                                    <input type="checkbox" class="form-checkbox">
-                                    <span class="ml-2">Paypal</span>
-                                </label>
-                                <!-- Additional payment options can be added -->
+
                             </div>
 
-                            <!-- Trip Selection Section -->
-                            <div>
-                                <h3 class="text-lg font-semibold mb-2">Select Trip</h3>
-                                <select
-                                    class="px-4 border-2 border-stone-950  bg-yellow-400 overflow-hidden shadow-sm sm:rounded-lg"
-                                    name="" id="">
-                                    <option class="text-l" value="">marrakech-safi</option>
-                                    <option value="">casablanca-safi</option>
-                                    <option value="">rabat-casablanca</option>
-                                </select>
-                                <!-- Add functionality for the driver to select a trip -->
-                                <!-- This could be a dropdown list of available destinations or a search field -->
-                            </div>
-                            <div class=" flex justify-end">
-                                <button
-                                    class="px-4 py-2 mt-3 border-2  bg-yellow-500 hover:bg-black hover:text-white overflow-hidden shadow-sm sm:rounded-lg"
-                                    type="submit">submit changes</button>
-                            </div>
-                        </form>
+                        </div>
+
                     </div>
+
+                    </div>
+
                 </div>
             </div>
+
+
         </div>
+    </div>
 </x-app-layout>

@@ -20,11 +20,11 @@ class User extends AuthenticatableUser implements Authenticatable
 
     public function driver()
     {
-        return $this->hasOne(Driver::class);
+        return $this->hasMany(Driver::class);
     }
     public function passenger()
     {
-        return $this->hasOne(Passenger::class);
+        return $this->hasMany(Passenger::class);
     }
     // Define common methods and attributes here
 }

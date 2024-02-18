@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('description');      
+            $table->string('description');
             $table->string('vehicule_type');
             $table->string('license_plate');
             $table->string('payment_accepted');
             $table->string('availablity_status');
             $table->string('start_location');
             $table->string('destination');
+            $table->boolean('banned');
+
             $table->timestamps();
         });
     }

@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('driver_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('passenger_id')->constrained('passengers')->cascadeOnDelete();                 
-            $table->dateTime('starting_time'); 
+            $table->foreignId('passenger_id')->constrained('passengers')->cascadeOnDelete();
+            $table->dateTime('starting_time');
             $table->string('start_location');
             $table->string('destination');
+            $table->string('deleted');
             $table->timestamps();
         });
     }

@@ -1,7 +1,9 @@
 <x-guest-layout>
-<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url('https://wallpaperset.com/w/full/e/a/7/181063.jpg'); background-size: cover; background-position: center center;">
-  <div class="rounded-xl bg-gray-800 bg-opacity-20 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
-    <div class="text-white">
+<img src="/images/bg.png" class="flex h-screen w-full items-center justify-center fixed inset-0 bg-cover"alt="">
+
+    <div class="flex h-screen w-full items-center justify-center">
+        <div class="rounded-xl bg-yellow-200 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+              <div class="text-white">
       <div class="mb-8 flex flex-col items-center">
         <img src="images/logo.png" width="125" alt="" srcset="" />
         <h1 class="mb-2 text-2xl">register</h1>

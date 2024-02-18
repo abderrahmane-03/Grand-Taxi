@@ -48,14 +48,14 @@ class AuthenticatedSessionController extends Controller
             // Redirect if the user is a passenger
             return redirect()->intended(RouteServiceProvider::PASSENGER);
         }
-        $ADMIN = ADMIN::where('user_id', $user->id)->first();
-        if ($ADMIN) {
+        $admin = ADMIN::where('user_id', $user->id)->first();
+        if ($admin) {
             // Redirect if the user is a ADMIN
             return redirect()->intended(RouteServiceProvider::ADMIN);
         }
         return redirect()->route('/');
  }
-        
+
 
     /**
      * Destroy an authenticated session.

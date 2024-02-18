@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
-use App\Models\User; 
+use App\Models\User;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -28,8 +28,6 @@ class RegisteredDriverController extends Controller
         $driver->update($data);
 
         return redirect('/driver-dashboard');
-   
-
 
     }
 
@@ -71,17 +69,18 @@ class RegisteredDriverController extends Controller
             'destination' => ['nullable'],
         ]);
         $driverData['user_id'] = $user->id;
+        
         // Create a new driver instance
        Driver::create($driverData);
 
         // Save the driver record
         // $user->driver()->save($driver);
-    
+
         // Trigger the Registered event
         event(new Registered($user));
-    
+
         // Log in the newly registered user
-    
+
         // Redirect to the home page
         Session::flash('success', 'You have registered successfully! Please login to continue.');
         return redirect('/login');

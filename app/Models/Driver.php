@@ -24,7 +24,7 @@ class Driver extends User
     }
     public function reservation()
     {
-        return $this->hasMany(Reservation::class, 'reservation_id');
+        return $this->hasMany(Reservation::class, 'driver_id');
     }
     // Additional methods specific to the Driver model
 }
