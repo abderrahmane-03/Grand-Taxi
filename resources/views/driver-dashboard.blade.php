@@ -32,12 +32,11 @@
                                     <p>{{ Auth::user()->email }}</p>
 
 
-
-
                                 </div>
                             </div>
 
                         </div>
+                        <div class="ml-4 mb-3">
                         <div class="flex mt-4 ">
                             <p class="font-semibold mr-2 ">Description:</p> {{ $driver->description }}
                         </div>
@@ -45,104 +44,94 @@
                             <p class="font-semibold mr-2 ">License Plate:</p> {{ $driver->license_plate }}
                         </div>
                         <div class="flex">
+
                             <p class="font-semibold mr-2 ">Vehicle Type: </p>{{ $driver->vehicule_type }}
                         </div>
-
+                </div>
 
                         <!-- Availability Update Section -->
+
                         <form action="{{ route('driver.update', $driver->id) }}" method="post">
                             @csrf
                             @method('put')
-                            <div class="mb-6">
-                                <h3 class="text-lg font-semibold mb-2">Availablity Status</h3>
-                                <!-- Allow driver to specify accepted payment types -->
+                             <!-- Availablity Status Section -->
+                            <h3 class="text-lg font-semibold mb-2">Availablity Status</h3>
+                            <div class="ml-4 mb-6">
+                                <!-- Available -->
                                 <div class="flex items-center mb-4">
-                                    <input id="availablity_status-1" type="radio" value="Available"
-                                        name="availablity_status"
-                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500   focus:ring-2">
-                                    <label for="availablity_status-1"
-                                        class="ml-2 text-sm font-medium text-black ">Available</label>
+                                    <input id="availablity_status-1" type="radio" value="Available" name="availablity_status"
+                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500   focus:ring-2"
+                                        {{ $driver->availablity_status == 'Available' ? 'checked' : '' }}>
+                                    <label for="availablity_status-1" class="ml-2 text-sm font-medium text-black ">Available</label>
                                 </div>
+                                <!-- Break -->
                                 <div class="flex items-center mb-4">
-                                    <input id="availablity_status-1" type="radio" value="Break"
-                                        name="availablity_status"
-                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500   focus:ring-2">
-                                    <label for="availablity_status-1"
-                                        class="ml-2 text-sm font-medium text-black ">Break</label>
+                                    <input id="availablity_status-2" type="radio" value="Break" name="availablity_status"
+                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500   focus:ring-2"
+                                        {{ $driver->availablity_status == 'Break' ? 'checked' : '' }}>
+                                    <label for="availablity_status-2" class="ml-2 text-sm font-medium text-black ">Break</label>
                                 </div>
+                                <!-- Off Service -->
                                 <div class="flex items-center">
-                                    <input checked id="availablity_status-2" type="radio" value="Off Service"
-                                        name="availablity_status"
-                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500 focus:ring-2 ">
-                                    <label for="availablity_status-2" class="ml-2 text-sm font-medium text-black ">Off
-                                        Service</label>
+                                    <input id="availablity_status-3" type="radio" value="Off Service" name="availablity_status"
+                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500 focus:ring-2 "
+                                        {{ $driver->availablity_status == 'Off Service' ? 'checked' : '' }}>
+                                    <label for="availablity_status-3" class="ml-2 text-sm font-medium text-black ">Off Service</label>
                                 </div>
-                                <!-- Additional payment options can be added -->
                             </div>
-
-                            <!-- Trip History and Ratings Section -->
-                            <!-- Trip History and Ratings Section -->
-
-
 
                             <!-- Payment Options Section -->
-                            <div class="mb-6">
-                                <h3 class="text-lg font-semibold mb-2">Payment Options</h3>
-                                <!-- Allow driver to specify accepted payment types -->
+                            <h3 class="text-lg font-semibold mb-2">Payment Options</h3>
+                            <div class="ml-4 mb-6">
+                                <!-- Cash -->
                                 <div class="flex items-center mb-4">
                                     <input id="payment_accepted-1" type="radio" value="Cash" name="payment_accepted"
-                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500   focus:ring-2">
-                                    <label for="payment_accepted-1"
-                                        class="ml-2 text-sm font-medium text-black ">Cash</label>
+                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500   focus:ring-2"
+                                        {{ $driver->payment_accepted == 'Cash' ? 'checked' : '' }}>
+                                    <label for="payment_accepted-1" class="ml-2 text-sm font-medium text-black ">Cash</label>
                                 </div>
+                                <!-- Visa Card -->
                                 <div class="flex items-center mb-4">
-                                    <input id="payment_accepted-1" type="radio" value="Visa card"
-                                        name="payment_accepted"
-                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500   focus:ring-2">
-                                    <label for="payment_accepted-1" class="ml-2 text-sm font-medium text-black ">Visa
-                                        Card</label>
+                                    <input id="payment_accepted-2" type="radio" value="Visa card" name="payment_accepted"
+                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500   focus:ring-2"
+                                        {{ $driver->payment_accepted == 'Visa card' ? 'checked' : '' }}>
+                                    <label for="payment_accepted-2" class="ml-2 text-sm font-medium text-black ">Visa Card</label>
                                 </div>
+                                <!-- Paypal -->
                                 <div class="flex items-center">
-                                    <input checked id="payment_accepted-2" type="radio" value="Paypal"
-                                        name="payment_accepted"
-                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500 focus:ring-2 ">
-                                    <label for="payment_accepted-2"
-                                        class="ml-2 text-sm font-medium text-black ">Paypal</label>
+                                    <input id="payment_accepted-3" type="radio" value="Paypal" name="payment_accepted"
+                                        class="form-radio w-4 h-4 text-yellow-300 bg-yellow-100 border-yellow-300 focus:ring-yellow-500 focus:ring-2 "
+                                        {{ $driver->payment_accepted == 'Paypal' ? 'checked' : '' }}>
+                                    <label for="payment_accepted-3" class="ml-2 text-sm font-medium text-black ">Paypal</label>
                                 </div>
-                                <!-- Additional payment options can be added -->
                             </div>
 
-                            <!-- Trip Selection Section -->
+
+                                                        <!-- Trip Selection Section -->
+                                                    <!-- Start Point -->
                             <div>
                                 <h3 class="text-lg font-semibold mb-2">Start Point</h3>
-                                <select
-                                    class="px-4 border-1 border-stone-950  bg-yellow-400 overflow-hidden shadow-sm sm:rounded-lg"
-                                    name="start_location" id="">
-                                    <option class="text-l" value="marrakech">marrakech</option>
-                                    <option class="text-l" value="safi">safi</option>
-                                    <option class="text-l" value="casablanca">casablanca</option>
-                                    <option class="text-l" value="rabat">rabat</option>
-
+                                <select class="px-4 ml-4 w-56 h-10 border-3 text-white border-yellow-100  bg-yellow-300 overflow-hidden shadow-sm sm:rounded-lg" name="start_location" id="">
+                                    <option class="text-l" value="Marrakech" {{ $driver->start_location == 'Marrakech' ? 'selected' : '' }}>Marrakech</option>
+                                    <option class="text-l" value="Safi" {{ $driver->start_location == 'Safi' ? 'selected' : '' }}>Safi</option>
+                                    <option class="text-l" value="Casablanca" {{ $driver->start_location == 'Casablanca' ? 'selected' : '' }}>Casablanca</option>
+                                    <option class="text-l" value="Rabat" {{ $driver->start_location == 'Rabat' ? 'selected' : '' }}>Rabat</option>
+                                    <option class="text-l" value="Sale" {{ $driver->start_location == 'Sale' ? 'selected' : '' }}>Sale</option>
                                 </select>
-                                <!-- Add functionality for the driver to select a trip -->
-                                <!-- This could be a dropdown list of available destinations or a search field -->
                             </div>
+
+                            <!-- Destination -->
                             <div>
-                                <h3 class="text-lg font-semibold mb-2">destination</h3>
-                                <select
-                                    class="px-4 border-1 border-stone-950  bg-yellow-400 overflow-hidden shadow-sm sm:rounded-lg"
-                                    name="destination" id="">
-
-
-                                    <option class="text-l" value="tanger">tanger</option>
-                                    <option class="text-l" value="tetouan">tetouan</option>
-                                    <option class="text-l" value="houceima">houceima</option>
-                                    <option class="text-l" value="fes">fes</option>
-
+                                <h3 class="text-lg font-semibold mb-2">Destination</h3>
+                                <select class="px-4 ml-4 w-56 h-10 border-3 text-white border-yellow-100  bg-yellow-300 overflow-hidden shadow-sm sm:rounded-lg" name="destination" id="">
+                                    <option class="text-l" value="Tanger" {{ $driver->destination == 'Tanger' ? 'selected' : '' }}>Tanger</option>
+                                    <option class="text-l" value="Tetouan" {{ $driver->destination == 'Tetouan' ? 'selected' : '' }}>Tetouan</option>
+                                    <option class="text-l" value="Houceima" {{ $driver->destination == 'Houceima' ? 'selected' : '' }}>Houceima</option>
+                                    <option class="text-l" value="Fes" {{ $driver->destination == 'Fes' ? 'selected' : '' }}>Fes</option>
+                                    <option class="text-l" value="Taroudant" {{ $driver->destination == 'Taroudant' ? 'selected' : '' }}>Taroudant</option>
                                 </select>
-                                <!-- Add functionality for the driver to select a trip -->
-                                <!-- This could be a dropdown list of available destinations or a search field -->
                             </div>
+
                             <div class="mb-6 mt-6">
                                 <h3 class="text-lg font-semibold mb-2">History of trips</h3>
                                 <!-- Display previous trips and ratings -->
@@ -185,7 +174,7 @@
                                                 starsContainer.appendChild(star);
                                             }
                                         </script>
-                                        
+
 
 
                                         @endforeach
@@ -218,7 +207,7 @@
                             <input type="hidden" name="driver_id" value="{{ $driver->id }}">
                             <div class="flex justify-end">
                                 <button
-                                    class="px-4 py-2 mt-3 border-2 bg-yellow-500 hover:bg-black hover:text-white overflow-hidden shadow-sm sm:rounded-lg"
+                                    class="px-4 py-2 mt-3 border-2 bg-yellow-300 hover:bg-black hover:text-white overflow-hidden shadow-sm sm:rounded-lg"
                                     type="submit">Submit Changes</button>
                             </div>
                         </form>

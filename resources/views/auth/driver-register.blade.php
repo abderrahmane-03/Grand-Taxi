@@ -78,6 +78,7 @@
             <select class="w-72 rounded-lg bg-yellow-300 h-10" name="vehicule_type" id="">
                 <option value="Mercedes">Mercedes</option>
                 <option value="Dacia">Dacia</option>
+                <option value="BMW">BMW</option>
                 <option value="Ferrari">Ferrari</option>
                 <option value="Tasla">Tasla</option>
                 <option value="Bugatti">Bugatti</option>

@@ -57,8 +57,9 @@ use Carbon\Carbon;
                             <option value="Tesla">Tesla</option>
                             <option value="BMW">BMW</option>
                             <option value="Ford">Ford</option>
-                            <option value="Mercides">Mercides</option>
+                            <option value="Mercides">Mercedes</option>
                             <option value="Toyota">Toyota</option>
+                            <option value="Bugatti">Bugatti</option>
                             <option value="Ferrari">Ferrari</option>
                             <option value="Dacia">Dacia</option>
                         </select>
@@ -98,7 +99,7 @@ use Carbon\Carbon;
             $fractionalPart = $rating - $wholeStars;
         @endphp
 
-    
+
     @for ($i = 0; $i < $wholeStars; $i++)
      <svg class=" inline-flex w-[18px] h-[18px] text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
     <path d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z"/>

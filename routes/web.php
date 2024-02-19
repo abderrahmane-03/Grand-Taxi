@@ -37,8 +37,16 @@ Route::post('/register', [RegisteredUserController::class, 'store'])->name('regi
 Route::get('/driver-register', function () {
     return view('auth.driver-register');
 });
+
 Route::put('/admin-dashboard/{driver}/bann', [AdminController::class, 'bann'])->name('bann.driver');
 Route::put('/admin-dashboard/{driver}/unbann', [AdminController::class, 'unbann'])->name('unbann.driver');
+
+Route::put('/admin-dashboard/{reservation}/ban', [AdminController::class, 'Rbann'])->name('bann.reservation');
+Route::put('/admin-dashboard/{reservation}/unban', [AdminController::class, 'Runbann'])->name('unbann.reservation');
+
+Route::put('/admin-dashboard/{passenger}/bban', [AdminController::class, 'Pbann'])->name('bann.passenger');
+Route::put('/admin-dashboard/{passenger}/unbban', [AdminController::class, 'Punbann'])->name('unbann.passenger');
+
 
 Route::get('/admin-dashboard', [AdminController::class, 'all'])->name('admin-dashboard');
 
@@ -55,8 +63,8 @@ Route::middleware(['auth','verified'])->group(function () {
         // Retrieve the driver information based on the logged-in user's ID
 
         $driver = Driver::where('user_id', Auth::id())->first();
-        if ($driver->banned = 1 ) {
-            return redirect()->route('banned')->with('error', 'please contact us if you think we made a mistake.');
+        if ($driver->banned == 1 ) {
+            return redirect()->route('llogin')->with('error', 'please contact us if you think we made a mistake.');
         }
         if (!$driver) {
             // Handle the case where the driver doesn't exist
@@ -82,7 +90,10 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/passenger-dashboard', function () {
             // Retrieve the driver information based on the logged-in user's ID
             $passenger= Passenger::where('user_id', Auth::id())->first();
-            $reservations = Reservation::where('passenger_id', $passenger->id)->get();
+            if ($passenger->banned == 1 ) {
+                return redirect()->route('llogin')->with('error', 'please contact us if you think we made a mistake.');
+            }
+            $reservations = Reservation::where('passenger_id', $passenger->id,'deleted',0)->get();
             $alldrivers=Driver::where('banned', 0)->get();
             $drivers = [];
             $reviews = [];

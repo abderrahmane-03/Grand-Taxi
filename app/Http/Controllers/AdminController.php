@@ -13,6 +13,20 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
 
+    public function Pbann(Passenger $passenger)
+    {
+        $passenger->banned = 1;
+        $passenger->save();
+        return redirect()->route('admin-dashboard');
+
+    }
+    public function Punbann(Passenger $passenger)
+    {
+        $passenger->banned = 0;
+        $passenger->save();
+        return redirect()->route('admin-dashboard');
+
+    }
     public function bann(Driver $driver)
     {
         $driver->banned = 1;
@@ -27,17 +41,34 @@ class AdminController extends Controller
         return redirect()->route('admin-dashboard');
 
     }
+    public function Rbann(Reservation $reservation)
+    {
+        $reservation->deleted = 1;
+        $reservation->save();
+        return redirect()->route('admin-dashboard');
+
+    }
+    public function Runbann(Reservation $reservation)
+    {
+        $reservation->deleted = 0;
+        $reservation->save();
+        return redirect()->route('admin-dashboard');
+
+    }
 
     public function all()
     {
         $alldrivers=Driver::get();
         $passengers= Passenger::get();
         $reservations = Reservation::get();
+        $reviewss = Review::get();
         $reviews = [];
+        $drivers = [];
         $avgs = [];
 
         foreach ($reservations as $reservation) {
              $reviews[$reservation->id] = Review::where('reservation_id', $reservation->id)->get();
+             $drivers[$reservation->id] = Driver::where('id', $reservation->driver_id)->get();
 
          }
 
@@ -47,7 +78,7 @@ class AdminController extends Controller
         }
 
 
-        return view('Admin-dashboard', compact('avgs','reservations','alldrivers','passengers'));
+        return view('Admin-dashboard', compact('reviewss','drivers','reviews','avgs','reservations','alldrivers','passengers'));
     }
 
 
